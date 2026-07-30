@@ -4,6 +4,33 @@ Krea 2 - an image generation model from [Krea AI](https://www.krea.ai).
 
 ---
 
+<div align="center">
+
+
+# DON'T CLONE THIS REPO, IT WON'T WORK AS IT ALL DEPENDS ON THE PYTHON_EMBEDED 3.12.10 TO WORK! 
+
+
+## I made this Krea 2 Portable 1 click install for Windows that uses Nvidia GTX 10XX, 16XX, RTX Quadro, 20XX, 30XX, 40XX, 50XX GPU. Installs Torch with Cuda, Sage Attention, Triton & all other requirements also creates Launch Krea 2 & Image Desktop Shortcuts. Automatically saves generations into "outputs" folder. Automatically saves last used settings in .json file & loads them automatically on startup.
+
+
+## Click here to jump to Install 👉 [Installation](#-Installation) 👈
+
+
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/redtash1/stable-audio-3-Windows-1-Click-Install/total?style=for-the-badge&labelColor=orange&color=0000ff)
+
+
+
+</div> 
+
+
+---
+
+
+<img width="1920" height="1080" alt="Krea 2" src="https://github.com/user-attachments/assets/69e16c11-1f1a-4fa3-a9aa-c4417e898118" />
+
+
+----
+
 <p align="center">
 <a href="https://docs.krea.ai/api-reference/introduction">API Docs</a> •
 <a href="https://huggingface.co/krea/krea-2-raw">Hugging Face (RAW)</a> •
@@ -11,70 +38,77 @@ Krea 2 - an image generation model from [Krea AI](https://www.krea.ai).
 <a href="https://www.krea.ai/blog/krea-2-technical-report">Technical Blog</a>
 </p>
 
-<img src="assets/big.png" alt="k2 banner">
 
-<img src="assets/k2.png" alt="k2 banner">
+---
 
-This is the official repository for the open version of Krea 2, an image model trained from scratch focused on creative and stylistic exploration. The repository contains inference code and instructions to run the model.
+### Features your choice of models
+* Krea2 Raw BF16 
+* Krea2 Raw INT8
+* Krea2 Turbo BF16
+* Krea2 Turbo INT8
 
-Krea 2 is the most aesthetic open-source image model available. On quality, Krea 2 is the #1 text-to-image model from an independent lab on Artificial Analysis [\[1\]](https://artificialanalysis.ai/image/leaderboard/text-to-image).
+### Features Krea 2 original LoRAs
+* Dark Brush
+* Dot Matrix
+* Kids Drawing
+* Neon Drip
+* Rainy Window
+* Retro Anime
+* Soft Watercolor
+* Sunset Blur
+* Vintage Tarot
 
-Krea 2 ships as two models. Krea 2 RAW is the base model. It's a pretrained checkpoint with no distillation, so it's diverse and highly malleable, and it's what you should use for fine-tuning, post-training, and LoRA training. Krea 2 Turbo is an 8-step distilled checkpoint built for fast, high-quality text-to-image.
+### Custom LoRA Downloader
 
-The two models are designed to work together. You train LoRAs on RAW and apply them on Turbo, and the LoRAs trained on RAW will work well on Turbo. **We highly recommend using RAW for training LoRAs and applying them on Turbo for inference.**
+### Real-ESRGAN Upscaler with 2X-4X & Anime
+* Single image, batch or folder upscaling
 
-## Setup
+### Image Metadata Viewer
+* All images are saved with all the Metadata embedded in PNG like ComfyUI.
 
-```bash
-uv sync
-```
+### Models, LoRA & Upscale Model Managers
 
-Both [Raw](https://huggingface.co/krea/Krea-2-Raw) and [Turbo](https://huggingface.co/krea/Krea-2-Turbo) safetensor files are available on Hugging Face. After downloading the checkpoints, set the `OSS_RAW` and `OSS_TURBO` environment variables to the paths of the downloaded files.
+---
 
-```bash
-export OSS_RAW=...
-export OSS_TURBO=...
-```
 
-## Usage
+# 📦 Installation
 
-The following commands run inference using the two available checkpoints with recommended settings.
+## Nvidia GTX 10XX, 16XX, RTX Quadro, 20XX, 30XX, 40XX, 50XX  
 
-### Raw (`oss_raw`)
+## GTX 10XX-RTX 30XX will have torch 2.6.0+cu126 installed for compatibility. RTX 40XX & 50XX will have torch 2.7.1+cu128.
 
-The base undistilled model. Use the full sampler with classifier-free guidance:
-The model has been trained to generate upto 1k resolution.
 
-```bash
-uv run inference.py "a fox walking in the snow" \
-    --checkpoint oss_raw --steps 52 --cfg 3.5
-```
+1. Make sure you have Git installed, if not download the Git Standalone Installer and click on Git for Windows/x64 Setup. 👉 [Git Standalone Installer Download](https://git-scm.com/downloads/win) 👈 To install Git, double click Git.exe and just keep clicking next until it's installed, you don't need to change anything.
 
-### Turbo (`oss_turbo`)
 
-Distilled for few-step sampling — run with 8 steps and CFG disabled.
-The model can generate images from 1k ~ 2k resolution.
+2. Make sure your Nvidia graphics drivers are up-to-date. If they are not or if your not sure, please click on the following link to download Nvidia graphics drivers. 👉 [Nvidia Drivers](https://www.nvidia.com/en-us/software/nvidia-app/) 👈
 
-```bash
-uv run inference.py "a fox walking in the snow" \
-    --checkpoint oss_turbo --steps 8 --cfg 0.0 --mu 1.15 --width 2048 --height 2048
-```
+3. Make sure that you have NVIDIA's [CUDA Toolkit](https://developer.nvidia.com/cuda-toolkit) version **12.8** (or newer) installed on your system.
 
-### Options
+4. Make sure you have FFMPEG Shared downloaded & on PATH. Download 👉 [ffmpeg-release-full-shared.7z](https://www.gyan.dev/ffmpeg/builds/) 👈
 
-| Flag | Default | Description |
-|------|---------|-------------|
-| `prompt` (positional) | — | Text prompt to generate from. |
-| `--steps` | `28` | Number of denoising steps. |
-| `--cfg` | `4.5` | Classifier-free guidance scale (`0` disables CFG). |
-| `--y1` | `0.5` | Timestep-shift `mu` at min resolution. |
-| `--y2` | `1.15` | Timestep-shift `mu` at max resolution. |
-| `--mu` | `None` | Pin a constant timestep-shift `mu`, overriding the resolution-derived value. Recommended `1.15` for `oss_turbo`. |
-| `--width` / `--height` | `1024` ~ `2048` | Output resolution; padded up to a multiple of 16 if needed. |
-| `--num-images` | `1` | Number of images to generate from the prompt. |
-| `--seed` | `0` | Base seed; image *i* uses `seed + i`. |
-| `--checkpoint` | `oss_raw` | Checkpoint to load (`oss_raw`, `oss_turbo`). Defaults to `$K2_CHECKPOINT`. |
-| `--output` | `sample` | Output filename prefix. |
+5.  Now after you have made sure Nvidia GPU drivers are up to date and Git is installed, download Krea 2 Windows 1 Click Install
+ from here 👉 [Stable Audio 3 Windows 1 Click Install](https://github.com/Redtash1/stable-audio-3-Windows-1-Click-Install/releases) 👈 or from the Releases section at the top right of this page.
+
+6. After downloading, extract Krea 2 Windows 1 Click Install ZIP file and pick where you would like to extract the zip files too.
+
+7. Then open Krea 2 Windows 1 Click Install main folder, you will see this in the root
+----
+
+<img width="511" height="110" alt="Screenshot 2026-07-29 204733" src="https://github.com/user-attachments/assets/971e00f2-d3b8-4459-a07a-49707744d3b9" />
+
+----
+8. Then double click on Install_Krea_2.bat to start the installation. It will install everything.  After installation is finished, slowly scroll back up to the top to make sure everything installed correctly.
+
+9. To launch Stable Audio 3 double click the Launch_Krea_2.bat & it will automatically open in your default Internet Browser.
+
+---
+
+## Troubleshooting
+
+If you have problems after a successful installation, please go to the Official Krea 2 Github to report problems. [Krea 2](https://github.com/krea-ai/krea-2). Thank you.
+
+### If this worked for you, Please give it a Star ⭐. Thank you.
 
 
 ## Documentation
@@ -82,26 +116,6 @@ uv run inference.py "a fox walking in the snow" \
 - [Prompting Guide](docs/prompting.md)
 - [Safety Guide](docs/safety.md)
 
-## Inference
-
-You can run our open source models on the following platforms.
-
-- [ComfyUI](https://github.com/comfy-org/comfyui)
-- [Fal](https://fal.ai/models/fal-ai/krea-2/turbo)
-- [SGLang](https://docs.sglang.io/cookbook/diffusion/Krea/Krea-2)
-
-
-## Finetuning Krea 2
-
-For finetuning Krea 2, we highly recommend that you **train a LoRA on the Raw model and apply it to the Turbo model** for inference.
-We recommend using the following providers and open source tools for finetuning Krea 2.
-
-- [Huggingface Diffusers](https://github.com/huggingface/diffusers)
-- [Ostris AI toolkit](https://github.com/ostris/ai-toolkit)
-- [Fal](https://fal.ai)
-  - [Training](https://fal.ai/models/fal-ai/krea-2-trainer)
-  - [Inference](https://fal.ai/models/fal-ai/krea-2/turbo/lora)
-- [Kohya (musubi tuner)]( https://github.com/kohya-ss/musubi-tuner)
 
 ## FAQ
 
@@ -112,6 +126,13 @@ Use the **Turbo** model for fast inference with high quality results. The **Raw*
 **What license is this model released under?**
 
 Both model weights are under our [community license](https://www.krea.ai/krea-2-licensing) with permissive use. To purchase a commercial license, please contact us at [opensource@krea.ai](mailto:opensource@krea.ai).
+
+
+## Thanks to:
+DeepBeepMeep for models, some Krea 2 code & MMGP for the GPU Poor. [Hugging Face](https://huggingface.co/DeepBeepMeep) [Github](https://github.com/deepbeepmeep)
+
+Xintao for [Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN)
+
 
 ## Citation
 ```
