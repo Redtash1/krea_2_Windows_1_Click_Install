@@ -100,7 +100,7 @@ Krea 2 - an image generation model from [Krea AI](https://www.krea.ai).
 ----
 8. Then double click on Install_Krea_2.bat to start the installation. It will install everything.  After installation is finished, slowly scroll back up to the top to make sure everything installed correctly.
 
-9. To launch Stable Audio 3 double click the Launch_Krea_2.bat & it will automatically open in your default Internet Browser.
+9. To launch Krea 2 double click the Launch_Krea_2.bat & it will automatically open in your default Internet Browser.
 
 ---
 
