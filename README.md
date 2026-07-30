@@ -16,7 +16,7 @@ Krea 2 - an image generation model from [Krea AI](https://www.krea.ai).
 ## Click here to jump to Install 👉 [Installation](#-Installation) 👈
 
 
-![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/redtash1/stable-audio-3-Windows-1-Click-Install/total?style=for-the-badge&labelColor=orange&color=0000ff)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/redtash1/krea_2_Windows_1_Click_Install/total?style=for-the-badge&labelColor=orange&color=0000ff)
 
 
 
